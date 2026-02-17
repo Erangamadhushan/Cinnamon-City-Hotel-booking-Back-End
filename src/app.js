@@ -29,5 +29,8 @@ app.use(limiter);
 app.get("/", (req, res) => {
   res.send("Welcome to the Cinnamon City Hotel Booking API!");
 });
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
 
 export default app;
