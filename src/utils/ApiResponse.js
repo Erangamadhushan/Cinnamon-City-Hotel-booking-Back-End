@@ -1,5 +1,5 @@
 export class ApiResponse {
-  constructor(success, data = null, message = null) {
+  constructor(success, message = null, data = null) {
     this.success = success;
     if (data !== null) {
       this.data = data;
