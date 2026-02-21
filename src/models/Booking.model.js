@@ -36,4 +36,5 @@ const bookingSchema = new mongoose.Schema(
 // Compound index to prevent overlapping bookings for the same room
 bookingSchema.index({ room: 1, checkInDate: 1, checkOutDate: 1 });
 
-export const Booking = mongoose.model("Booking", bookingSchema);
+export const Booking =
+  mongoose.models.Booking || mongoose.model("Booking", bookingSchema);
