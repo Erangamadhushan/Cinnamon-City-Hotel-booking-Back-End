@@ -95,4 +95,4 @@ hotelSchema.methods.addRating = function (userId, bookingId, ratingValue) {
   }
 };
 
-export const Hotel = mongoose.model("Hotel", hotelSchema);
+export const Hotel = mongoose.models.Hotel || mongoose.model("Hotel", hotelSchema);

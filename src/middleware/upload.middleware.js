@@ -1,7 +1,7 @@
-import { ApiError } from "../utils/ApiError";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { ApiError } from "../utils/ApiError.js";
 
 export function uploadMiddleware(req, res, next) {
   if (!req.file) {
