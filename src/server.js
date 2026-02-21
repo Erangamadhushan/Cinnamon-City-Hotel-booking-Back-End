@@ -1,7 +1,10 @@
 import app from "./app.js";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.config.js";
-import { notFoundHandler, errorHandler } from "./middleware/error.middleware.js";
+import {
+  notFoundHandler,
+  errorHandler,
+} from "./middleware/error.middleware.js";
 
 dotenv.config();
 

@@ -20,14 +20,12 @@ export const register = asyncHandler(async (req, res) => {
   const token = generateToken(user);
   const { ...userData } = user.toObject();
   delete userData.password;
-  res
-    .status(201)
-    .json(
-      new ApiResponse(true, "User registered successfully", {
-        token,
-        user: userData,
-      }),
-    );
+  res.status(201).json(
+    new ApiResponse(true, "User registered successfully", {
+      token,
+      user: userData,
+    }),
+  );
 });
 
 export const registerAdmin = asyncHandler(async (req, res) => {
@@ -44,14 +42,12 @@ export const registerAdmin = asyncHandler(async (req, res) => {
   const token = generateToken(user);
   const { ...userData } = user.toObject();
   delete userData.password;
-  res
-    .status(201)
-    .json(
-      new ApiResponse(true, "Admin user registered successfully", {
-        token,
-        user: userData,
-      }),
-    );
+  res.status(201).json(
+    new ApiResponse(true, "Admin user registered successfully", {
+      token,
+      user: userData,
+    }),
+  );
 });
 
 export const login = asyncHandler(async (req, res) => {

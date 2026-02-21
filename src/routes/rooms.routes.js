@@ -1,6 +1,12 @@
-import { Router } from 'express';
-import { auth, requireRole } from '../middleware/auth.middleware.js';
-import { listRooms, getRoom, createRoom, updateRoom, deleteRoom } from "../controllers/rooms.controller.js";
+import { Router } from "express";
+import { auth, requireRole } from "../middleware/auth.middleware.js";
+import {
+  listRooms,
+  getRoom,
+  createRoom,
+  updateRoom,
+  deleteRoom,
+} from "../controllers/rooms.controller.js";
 
 const router = Router();
 
