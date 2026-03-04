@@ -13,7 +13,15 @@ export const listHotels = asyncHandler(async (req, res) => {
   if (city) filter.city = city;
   if (q) filter.name = { $regex: q, $options: "i" };
 
-  const hotels = await Hotel.find(filter).sort({ createdAt: -1 });
+  if (Object.keys(filter).length === 0) {
+    // No filters, return a random sample of 20 hotels for better performance
+    const count = await Hotel.countDocuments();
+    const randomSkip = Math.max(0, Math.floor(Math.random() * count) - 20);
+    var hotels = await Hotel.find().skip(randomSkip).limit(20);
+  } else {
+    var hotels = await Hotel.find(filter).limit(100); // limit to 100 results when filtering
+  }
+  console.log("Hotels retrieved:", hotels.length);
   res
     .status(200)
     .json(new ApiResponse(true, "Hotels retrieved successfully", hotels));
