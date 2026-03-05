@@ -2,7 +2,7 @@ import { Room } from "../models/Room.model.js";
 import { Hotel } from "../models/Hotel.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utils/AsyncHandler.js";
 
 export const createRoom = asyncHandler(async (req, res) => {
   const { hotelId } = req.params;
@@ -27,20 +27,13 @@ export const createRoom = asyncHandler(async (req, res) => {
     .json(new ApiResponse(true, "Room created successfully", room));
 });
 
-export const listRooms = asyncHandler((req, res) => {
+export const listRooms = asyncHandler(async (req, res) => {
   const { hotelId } = req.params;
-
   const filter = hotelId ? { hotel: hotelId } : {};
-  Room.find(filter)
-    .sort({ createdAt: -1 })
-    .then((rooms) => {
-      res
-        .status(200)
-        .json(new ApiResponse(true, "Rooms retrieved successfully", rooms));
-    })
-    .catch((err) => {
-      throw new ApiError(500, "Failed to retrieve rooms");
-    });
+  const rooms = await Room.find(filter).sort({ createdAt: -1 });
+  res
+    .status(200)
+    .json(new ApiResponse(true, "Rooms retrieved successfully", rooms));
 });
 
 export const getRoom = asyncHandler(async (req, res) => {
