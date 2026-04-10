@@ -2,7 +2,7 @@ import { Booking } from "../models/Booking.model.js";
 import { Hotel } from "../models/Hotel.model.js";
 import { Room } from "../models/Room.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utils/AsyncHandler.js";
 import { getLastNMonthsLabels } from "../utils/NMonthsLabels.js";
 
 export const summary = asyncHandler(async (req, res) => {

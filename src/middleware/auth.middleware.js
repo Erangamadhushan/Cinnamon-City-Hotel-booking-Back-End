@@ -6,16 +6,14 @@ export function auth(required = true) {
     const header = req.headers.authorization;
     if (!header || !header.startsWith("Bearer ")) {
       if (required) {
-        return next(
-          new ApiError(401, "Authorization header missing or malformed"),
-        );
+        throw new ApiError(401, "Authorization header missing or malformed");
       } else {
         return next();
       }
     }
     const token = header.split(" ")[1];
     if (!token) {
-      if (required) return next(new ApiError(401, "Token missing"));
+      if (required) throw new ApiError(401, "Token missing");
       return next();
     }
 
@@ -24,7 +22,7 @@ export function auth(required = true) {
       req.user = decoded;
       next();
     } catch (error) {
-      return next(new ApiError(401, "Invalid or expired token"));
+      throw new ApiError(401, "Invalid or expired token");
     }
   };
 }
@@ -32,10 +30,10 @@ export function auth(required = true) {
 export function requireRole(role) {
   return (req, res, next) => {
     if (!req.user) {
-      return next(new ApiError(401, "Unauthorized"));
+      throw new ApiError(401, "Unauthorized");
     }
     if (req.user.role !== role) {
-      return next(new ApiError(403, "Insufficient permissions"));
+      throw new ApiError(403, "Insufficient permissions");
     }
     next();
   };

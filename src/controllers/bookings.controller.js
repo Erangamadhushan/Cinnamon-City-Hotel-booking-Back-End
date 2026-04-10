@@ -1,8 +1,8 @@
-import { Booking } from "../models/booking.model.js";
-import { Room } from "../models/room.model.js";
+import { Booking } from "../models/Booking.model.js";
+import { Room } from "../models/Room.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utils/AsyncHandler.js";
 import { isDateOverlap } from "../utils/DateOverLap.js";
 
 export const createBooking = asyncHandler(async (req, res) => {
